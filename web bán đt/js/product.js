@@ -1,3 +1,5 @@
+
+show()
 function create(data) {
     let name = $('#name').val();
     let price = $('#price').val();
@@ -103,6 +105,7 @@ function printData(data) {
                     </td>
                     <td>${data[i].name}</td>
                     <td>${data[i].category.name}</td>
+                    <td>${data[i].price}</td>
                     <td><img src="${data[i].img}"   ></td>
                     <td>${data[i].star}</td>
                     <td>
