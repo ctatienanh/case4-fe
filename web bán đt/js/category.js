@@ -28,9 +28,8 @@ function printDataCtegpry(d) {
         content +=
             `   
             <option value="${data[i].id}">${data[i].name}</option>
-
 `
     }
-
+    document.getElementById("idcategoryedit").innerHTML = content;
     contentElement.innerHTML = content;
 }

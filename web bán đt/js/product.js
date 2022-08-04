@@ -1,5 +1,5 @@
-
 show()
+
 function create(data) {
     let name = $('#name').val();
     let price = $('#price').val();
@@ -14,7 +14,6 @@ function create(data) {
     let memoryStick = $('#thenho').val();
     let pin = $('#pin').val();
 
-
     let obj = {
         name: name,
         category: {
@@ -22,17 +21,17 @@ function create(data) {
         },
         price: price,
         img: data,
-        displayy:displayy,
-        hedieuhanh:hedieuhanh,
-        camerasau:camerasau,
-        cameratruoc:cameratruoc,
-        memory:memory,
-        ram:ram,
-        cpu:cpu,
-        memoryStick:memoryStick,
-        pin:pin
-
+        displayy: displayy,
+        hedieuhanh: hedieuhanh,
+        camerasau: camerasau,
+        cameratruoc: cameratruoc,
+        memory: memory,
+        ram: ram,
+        cpu: cpu,
+        memoryStick: memoryStick,
+        pin: pin
     }
+
     $.ajax({
             type: "POST",
             headers: {
@@ -44,7 +43,7 @@ function create(data) {
             //xử lý khi thành công
             success: function (data) {
                 alert("them thanh cong")
-                show()
+show()
             },
             error: function (err) {
                 console.log(err)
@@ -83,8 +82,8 @@ function show() {
         url: "http://localhost:8080/product",
         //xử lý khi thành công
         success: function (data) {
-            console.log(data)
-            printData(data);
+            console.log( data)
+            printData(data.content);
         },
         error: function (err) {
             console.log(err)
@@ -93,9 +92,9 @@ function show() {
 }
 
 function printData(data) {
-    var tc = document.getElementById("addProductAdmin");
-    var s = `<table class="table-outline hideImg">`;
-    for (var i = 0; i < data.length; i++) {
+    let tc = document.getElementById("addProductAdmin");
+    let s = `<table class="table-outline hideImg">`;
+    for (let i = 0; i < data.length; i++) {
         s += `       <tr>
                     <td>
 							<span class="custom-checkbox">
@@ -106,11 +105,11 @@ function printData(data) {
                     <td>${data[i].name}</td>
                     <td>${data[i].category.name}</td>
                     <td>${data[i].price}</td>
-                    <td><img src="${data[i].img}"   ></td>
+                    <td><img src="${data[i].img}" width="200px" height="200px"  ></td>
                     <td>${data[i].star}</td>
                     <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"  data-target="#myModalEdit" onclick="getEdit(${data[i].id})"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" onclick="deleteProduct(${data[i].id})"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                     </td>
                 </tr>`;
     }
@@ -119,3 +118,25 @@ function printData(data) {
 
     tc.innerHTML = s;
 }
+
+
+function deleteProduct(id) {
+    confirm("bạn muốn xóa không ?") ?
+        $.ajax({
+            type: "DELETE",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "http://localhost:8080/product/" + id,
+            //xử lý khi thành công
+            success: function (data) {
+show()
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        }) : ""
+}
+
+
