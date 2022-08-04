@@ -16,7 +16,7 @@ function getEdit(id) {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        url: "http://localhost:8080/product/" + id,
+        url: "http://localhost:8180/product/" + id,
         //xử lý khi thành công
         success: function (data) {
             showEdit(data);
@@ -88,7 +88,7 @@ function callEdit(product){
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        url: "http://localhost:8080/product",
+        url: "http://localhost:8180/product",
         data: JSON.stringify(product),
         //xử lý khi thành công
         success: function (data) {
@@ -123,7 +123,7 @@ function editYesUpFile() {
         processData: false,
         type: "POST",
         data: formData,
-        url: "http://localhost:8080/product/upImg",
+        url: "http://localhost:8180/product/upImg",
         success: function (data) {
             let product = {
                 id:id,
