@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -288,7 +288,7 @@
 							</span>
                     </th>
                     <th>Name</th>
-                    <th>Category</th>
+                    <th>Category</th>z
                     <th>Price</th>
                     <th>Img</th>
                     <th>Star</th>
@@ -301,13 +301,16 @@
             <div class="clearfix">
                 <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                 <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+<!--                    <li class="page-item disabled"><a href="#">Previous</a></li>-->
+<!--                    <li class="page-item"><a href="#" class="page-link">1</a></li>-->
+<!--                    <li class="page-item"><a href="#" class="page-link">2</a></li>-->
+<!--                    <li class="page-item active"><a href="#" class="page-link">3</a></li>-->
+<!--                    <li class="page-item"><a href="#" class="page-link">4</a></li>-->
+<!--                    <li class="page-item"><a href="#" class="page-link">5</a></li>-->
+<!--                    <li class="page-item"><a href="#" class="page-link">Next</a></li>-->
+                    <button th:if="${product.hasPrevious()}"><a th:href="@{/product(page=${product.number}-1,option =${option})}"><<<<<<</a></button>
+                    <b th:text="${product.number} + 1"></b> / <b th:text="${product.totalPages}"></b>
+                    <button th:if="${product.hasNext()}"><a th:href="@{/product(page=${product.number}+1,option =${option})}">>>>>>></a></button>
                 </ul>
             </div>
         </div>
