@@ -38,7 +38,7 @@ function create(data) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: "http://localhost:8080/product",
+            url: "http://localhost:8180/product",
             data: JSON.stringify(obj),
             //xử lý khi thành công
             success: function (data) {
@@ -65,7 +65,7 @@ function uploadFile() {
         processData: false,
         type: "POST",
         data: formData,
-        url: "http://localhost:8080/product/upImg",
+        url: "http://localhost:8180/product/upImg",
         success: function (data) {
             create(data);
         }
@@ -79,7 +79,7 @@ function show() {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        url: "http://localhost:8080/product",
+        url: "http://localhost:8180/product",
         //xử lý khi thành công
         success: function (data) {
             console.log( data)
@@ -128,7 +128,7 @@ function deleteProduct(id) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: "http://localhost:8080/product/" + id,
+            url: "http://localhost:8180/product/" + id,
             //xử lý khi thành công
             success: function (data) {
 show()
