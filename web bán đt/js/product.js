@@ -43,7 +43,7 @@ function create(data) {
             //xử lý khi thành công
             success: function (data) {
                 alert("them thanh cong")
-show()
+                show()
             },
             error: function (err) {
                 console.log(err)
@@ -82,7 +82,7 @@ function show() {
         url: "http://localhost:8180/product",
         //xử lý khi thành công
         success: function (data) {
-            console.log( data)
+            console.log(data)
             printData(data.content);
         },
         error: function (err) {
@@ -95,7 +95,8 @@ function printData(data) {
     let tc = document.getElementById("addProductAdmin");
     let s = `<table class="table-outline hideImg">`;
     for (let i = 0; i < data.length; i++) {
-        s += `       <tr>
+        s +=
+            `       <tr>
                     <td>
 							<span class="custom-checkbox">
 								<input type="checkbox" id="checkbox1" name="options[]" value="1">
@@ -131,7 +132,7 @@ function deleteProduct(id) {
             url: "http://localhost:8180/product/" + id,
             //xử lý khi thành công
             success: function (data) {
-show()
+                show()
             },
             error: function (err) {
                 console.log(err)
