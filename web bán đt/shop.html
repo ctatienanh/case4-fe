@@ -288,14 +288,14 @@
           beforeSend: function (xhr) {
               xhr.setRequestHeader ("Authorization", "Bearer " + token);
           },
-          url: "http://localhost:8080/category",
+          url: "http://localhost:8180/category",
           success: function (data) {
               show(data)
               // localStorage.setItem("token", "");
           },
           error: function (err) {
               console.log("loiiiiiii")
-              location.href = "login.html"
+              // location.href = "login.html"
           }
       })
   </script>

@@ -175,12 +175,19 @@
                 // kiểu truyền đi
                 'Content-Type': 'application/json'
             },
-            url: "http://localhost:8080/login",
+            url: "http://localhost:8180/login",
             data: JSON.stringify(appUser),
             //xử lý khi thành công
             success: function (data) {
-                localStorage.setItem("token", data);
-                location.href = "shop.html"
+                console.log(data)
+                localStorage.setItem("token", data.token);
+                let role=data.role
+                if (role=="ROLE_USER"){
+                    location.href = "shop.html"
+                }else if (role=="ROLE_ADMIN"){
+                    location.href = "admin.html"
+                }
+                // location.href = "shop.html"
             },
             error: function (err) {
                 console.log(err)
