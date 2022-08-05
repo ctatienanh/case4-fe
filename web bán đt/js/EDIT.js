@@ -83,12 +83,12 @@ function editNoUpFile(){
 
 function callEdit(product){
     $.ajax({
-        type: "PUT",
+        type: "POST",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        url: "http://localhost:8180/product",
+        url: "http://localhost:8180/product/edit",
         data: JSON.stringify(product),
         //xử lý khi thành công
         success: function (data) {

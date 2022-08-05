@@ -123,12 +123,12 @@ function printData(data) {
 function deleteProduct(id) {
     confirm("bạn muốn xóa không ?") ?
         $.ajax({
-            type: "DELETE",
+            type: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: "http://localhost:8180/product/" + id,
+            url: "http://localhost:8180/product/delete/" + id,
             //xử lý khi thành công
             success: function (data) {
 show()
