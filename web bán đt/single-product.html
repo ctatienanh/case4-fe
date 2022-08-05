@@ -559,15 +559,15 @@
                                                 </p>
                                                 <p><input type="submit" value="Submit" onclick="createcomment()"></p>
                                                 <script>
-                                                    let address = window.location.search
-                                                    let parameterList = new URLSearchParams(address)
-                                                    let ids = parameterList.get("id")
+                                                    let addresss = window.location.search
+                                                    let parameterLists = new URLSearchParams(addresss)
+                                                    let idss = parameterLists.get("id")
 
                                                     function createcomment() {
                                                         let nameUser = $('#usercomment').val();
                                                         let comment = $('#comment').val();
                                                         let starComment = $('#star').val();
-                                                        let idPhone = ids
+                                                        let idPhone = idss
                                                         let obj = {
                                                             starComment : starComment,
                                                             comment : comment,
