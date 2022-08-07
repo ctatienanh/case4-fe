@@ -181,6 +181,7 @@
             success: function (data) {
                 console.log(data)
                 localStorage.setItem("token", data.token);
+                localStorage.setItem("roleLogin",data.role);
                 let role=data.role
                 if (role=="ROLE_USER"){
                     location.href = "shop.html"

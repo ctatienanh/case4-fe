@@ -1,4 +1,5 @@
-function logout(){
+
+
     // let token = localStorage.getItem("token");
     // $.ajax({
     //     type: "GET",
@@ -20,6 +21,10 @@ function logout(){
     //         location.href = "login.html"
     //     }
     // })
-    localStorage.setItem("token", "");
+
+function logoutuser(){
+    // localStorage.setItem("token", "");
+    localStorage.clear()
+    // localStorage.setItem("roleLogin","");
     location.href = "shop.html"
 }

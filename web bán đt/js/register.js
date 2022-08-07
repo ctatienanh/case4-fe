@@ -35,7 +35,7 @@ function register(){
     let messageConfirmPassword="";
     let messagePhoneNumber="";
     let messageEmail="";
-    if (confirm_password==passWord){messageConfirmPassword="Vui lòng xác nhận đúng mật khẩu "
+    if (confirm_password!=passWord){messageConfirmPassword="Vui lòng xác nhận đúng mật khẩu "
         document.getElementById("messageConfirmPassword").innerText = messageConfirmPassword;
         check=false;
     }
@@ -78,8 +78,6 @@ function register(){
         }
     })
     }
-
-
 
 
 
