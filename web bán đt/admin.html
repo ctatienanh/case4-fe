@@ -466,10 +466,8 @@
 <script>
 
     let token=localStorage.getItem("token")
-
-
     let role=localStorage.getItem("roleLogin");
-    if (role===""){
+    if (role==null){
         location.href="403.html";
     }
     function parseJwt (token) {
