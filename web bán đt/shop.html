@@ -96,7 +96,7 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a  data-target="#myShop" data-toggle="modal">Cart  <i class="fa fa-shopping-cart"></i>
+                    <a  data-target="#myShop" data-toggle="modal" >Cart<i class="fa fa-shopping-cart"></i>
                     <input class="product-count" value="0" id="soluong" style="border: none"  ></a>
                 </div>
             </div>
@@ -309,7 +309,7 @@
             <div class="modal-footer">
                 <input value="Tổng giá :" style="width: 100px; border: none" readonly>
                 <input style="width: 150px; border: none" type="number" id="tonggia" size="4" class="input-text qty text" title="Qty"  value="0" min="0" step="1">
-                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="createShop()">Thanh Toan</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" data-target="#myModal" data-toggle="modal" onclick="createShop()">Thanh Toan</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
 
@@ -348,7 +348,7 @@
         url: "http://localhost:8180/product",
         //xử lý khi thành công
         success: function (data) {
-            console.log(data)
+
             printDataProduct(data.content);
         },
         error: function (err) {
@@ -357,6 +357,7 @@
     })
 
     function printDataProduct(data) {
+
         let s = "";
         for (let i = 0; i < data.length; i++) {
             s += `
@@ -372,7 +373,7 @@
                         <h2><a href="single-product.html?id=${data[i].id}"> ${data[i].name}</a> </h2>
 
                         <div class="product-carousel-price">
-                            <ins>${data[i].price}</ins> <del>$999.00</del>
+                            <ins>${data[i].price}</ins>
                         </div>
 
                         <div class="product-option-shop">

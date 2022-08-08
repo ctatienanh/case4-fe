@@ -3,6 +3,7 @@ show()
 function create(data) {
     let name = $('#name').val();
     let price = $('#price').val();
+    let amount = $('#amount').val();
     let idcategory = $('#idcategory').val();
     let displayy = $('#display').val();
     let hedieuhanh = $('#hedieuhanh').val();
@@ -21,6 +22,7 @@ function create(data) {
         },
         price: price,
         img: data,
+        amounts: amount,
         displayy: displayy,
         hedieuhanh: hedieuhanh,
         camerasau: camerasau,
@@ -30,6 +32,11 @@ function create(data) {
         cpu: cpu,
         memoryStick: memoryStick,
         pin: pin
+    }
+    let array = {
+        name :name,
+        ram:ram,
+        price: price
     }
 
     $.ajax({
@@ -43,7 +50,8 @@ function create(data) {
             //xử lý khi thành công
             success: function (data) {
                 alert("them thanh cong")
-show()
+                kiemtraSales(array)
+                show()
             },
             error: function (err) {
                 console.log(err)
@@ -82,7 +90,7 @@ function show() {
         url: "http://localhost:8180/product",
         //xử lý khi thành công
         success: function (data) {
-            console.log( data)
+            console.log(data)
             printData(data.content);
         },
         error: function (err) {
@@ -97,10 +105,7 @@ function printData(data) {
     for (let i = 0; i < data.length; i++) {
         s += `       <tr>
                     <td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="options[]" value="1">
-								<label for="checkbox1"></label>
-							</span>
+							
                     </td>
                     <td>${data[i].name}</td>
                     <td>${data[i].category.name}</td>
@@ -131,7 +136,7 @@ function deleteProduct(id) {
             url: "http://localhost:8180/product/delete/" + id,
             //xử lý khi thành công
             success: function (data) {
-show()
+                show()
             },
             error: function (err) {
                 console.log(err)

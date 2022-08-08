@@ -3,7 +3,7 @@ prinshop()
 class shops {
     constructor(idname,name, price, amount, priceall) {
         this.idname = idname
-        this.name = name
+        this.nameproduct = name
         this.price = price
         this.amount = amount;
         this.priceAll = priceall
@@ -12,23 +12,29 @@ class shops {
 
 function addshop(i,n, p, a, pa) {
     array.push(new shops(i,n, p, a, pa)),
-        console.log(array)
+
+        localStorage.setItem("TIEN ANH",JSON.stringify(array));
     prinshop()
 }
 
 
-function delletelast(name) {
-    let index = checkindexProduct(name);
+function delletelast(id) {
+    let index = checkindexProduct(id);
     array.splice(index, 1);
     prinshop()
 }
 
 function prinshop() {
+    if(JSON.parse(localStorage.getItem("TIEN ANH")) != null){
+        array = JSON.parse(localStorage.getItem("TIEN ANH"))
+    }
+    tongsoluong(array)
+    document.getElementById("tonggia").value = sum();
     let s = ""
     for (let i = 0; i < array.length; i++) {
         s += ` <tr class="cart_item">
                             <td class="product-remove">
-                                <a title="Remove this item" class="remove" onclick="delletelast('${array[i].name}')">×</a>
+                                <a title="Remove this item" class="remove" onclick="delletelast('${array[i].idname}')">×</a>
                             </td>
 
                             <td class="product-thumbnail">
@@ -36,7 +42,7 @@ function prinshop() {
                             </td>
 
                             <td class="product-name">
-                                <a href="single-product.html">${array[i].name}</a>
+                                <a href="single-product.html">${array[i].nameproduct}</a>
                             </td>
 
                             <td class="product-price">
@@ -44,9 +50,9 @@ function prinshop() {
                             </td>
                             <td class="product-quantity">
                                 <div class="quantity buttons_added">
-                                    <input type="button"  class="minus" onclick="giam('${array[i].name}')" value="-">
-                                    <input type="number" id="${array[i].name+'1'}" size="4" class="input-text qty text" title="Qty" value="${array[i].amount}" min="0" step="1">
-                                    <input type="button" id="${array[i].name}" onclick="tang('${array[i].name}',${array[i].idname})"  class="plus" value="+">
+                                    <input type="button"  class="minus" onclick="giam('${array[i].nameproduct}',${array[i].idname})" value="-">
+                                    <input type="number" id="${array[i].nameproduct+array[i].idname }" size="4" class="input-text qty text" title="Qty" value="${array[i].amount}" readonly min="0" step="1">
+                                    <input type="button" id="${array[i].nameproduct}" onclick="tang('${array[i].nameproduct}',${array[i].idname})"  class="plus" value="+">
                                 </div>
                             </td>
                             <td class="product-subtotal">
@@ -59,11 +65,8 @@ function prinshop() {
     document.getElementById("shopchitiet").innerHTML = s;
 
 }
-function checkProduct(ids) {
 
-}
 function kiemtrasanpham(id,n, p, a, pa) {
-
     $.ajax({
         type: "GET",
         headers: {
@@ -81,46 +84,52 @@ function kiemtrasanpham(id,n, p, a, pa) {
                 document.getElementById("thongbaoshop").innerHTML = s;
                 let check = true;
                 for (let i = 0; i < array.length; i++) {
-                    if (array[i].name == n) {
+                    if (array[i].idname == id) {
                         array[i].amount += 1
                         array[i].priceAll += array[i].price
                         document.getElementById("tonggia").value = sum();
+                        localStorage.setItem("TIEN ANH",JSON.stringify(array));
                         prinshop()
                         check = false;
                         break;
                     }
                 }
-
                 if (check == true) {
                     addshop(id,n, p, a, pa)
                     document.getElementById("tonggia").value = sum();
                 }
-                let t = Number(document.getElementById("soluong").value)
-                t += 1;
-                document.getElementById("soluong").value = t;
+
             }
         },
         error: function (err) {
             console.log(err)
         }
     })
+}
 
+function tongsoluong(array) {
+    let t=0;
+    for (let i = 0; i < array.length; i++) {
+        t += array[i].amount
+    }
+    document.getElementById("soluong").value = t;
 }
 
 
 
 
-function checknameProduct(name) {
+function checknameProduct(id)
+{
     for (let i = 0; i < array.length; i++) {
-        if (array[i].name == name) {
+        if (array[i].idname == id) {
             return array[i];
         }
     }
 }
 
-function checkindexProduct(name) {
+function checkindexProduct(id) {
     for (let i = 0; i < array.length; i++) {
-        if (array[i].name == name) {
+        if (array[i].idname == id) {
             return i;
         }
     }
@@ -128,6 +137,7 @@ function checkindexProduct(name) {
 
 
 function tang(name,id) {
+    console.log(name)
     $.ajax({
         type: "GET",
         headers: {
@@ -137,11 +147,12 @@ function tang(name,id) {
         url: "http://localhost:8180/single/" + id,
         //xử lý khi thành công
         success: function (data) {
-            if (data.amounts <= checknameProduct(name).amount){
+            if (data.amounts <= checknameProduct(id).amount){
                 document.getElementById(""+name).style.display = "none"
             }else {
-                checknameProduct(name).amount += 1;
-                checknameProduct(name).priceAll += checknameProduct(name).price;
+                checknameProduct(id).amount += 1;
+                checknameProduct(id).priceAll += checknameProduct(id).price;
+                localStorage.setItem("TIEN ANH",JSON.stringify(array));
                 document.getElementById("tonggia").value = sum();
                 prinshop()
             }
@@ -152,17 +163,19 @@ function tang(name,id) {
     })
 }
 
-function giam(name) {
-    let d = Number(document.getElementById("" + name+"1").value)
+function giam(name,id) {
+    let d = Number(document.getElementById(""+name+id ).value)
     d -= 1;
+
     if (d > 0) {
-        checknameProduct(name).amount -= 1;
-        checknameProduct(name).priceAll -= checknameProduct(name).price;
-        document.getElementById("tonggia").value = hieu();
+        checknameProduct(id).amount -= 1;
+        checknameProduct(id).priceAll -= checknameProduct(id).price;
+        document.getElementById("tonggia").value = hieu(id);
+        localStorage.setItem("TIEN ANH",JSON.stringify(array));
         prinshop()
     } else {
         confirm("nếu ấn giảm nữa sản phẩm của bạn sẽ bị xóa khỏi danh sách nhấn ok để xác nhận ?") ?
-            delletelast(name) : ""
+            delletelast(id) : ""
     }
 }
 
@@ -177,10 +190,11 @@ function createShop() {
             data: JSON.stringify(array),
             //xử lý khi thành công
             success: function (data) {
-                alert("thanh toan thanh cong")
+                let s =`                <p style="text-align: center">thanh toán thành công vui lòng chuẩn bị số tiền : ${document.getElementById("tonggia").value}</p>`
+                document.getElementById("thongbaoshop").innerHTML = s;
                 array = []
                 document.getElementById("soluong").value = 0;
-                alert(array.length)
+                localStorage.removeItem("TIEN ANH");
                 prinshop()
             },
             error: function (err) {
@@ -198,10 +212,11 @@ function sum() {
     return t;
 }
 
-function hieu() {
+function hieu(id) {
     let t = document.getElementById("tonggia").value
     for (let i = 0; i < array.length; i++) {
-        t-= array[i].priceAll
+        if (array[i].id ==id)
+        t-= array[i].price
     }
     return t;
 }

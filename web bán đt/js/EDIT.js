@@ -33,6 +33,7 @@ function showEdit(product) {
     document.getElementById("nameedit").value = product.name;
     document.getElementById("priceedit").value = product.price;
     document.getElementById("imgedit").src = product.img;
+    document.getElementById("amountedit").value = product.amounts;
     document.getElementById("displayedit").value = product.displayy;
     document.getElementById("hedieuhanhedit").value = product.hedieuhanh;
     document.getElementById("camerasauedit").value = product.camerasau;
@@ -50,6 +51,7 @@ function editNoUpFile(){
     let name = $('#nameedit').val();
     let price = $('#priceedit').val();
     let idcategory = $('#idcategoryedit').val();
+    let amount = $('#amountedit').val();
     let displayy = $('#displayedit').val();
     let hedieuhanh = $('#hedieuhanhedit').val();
     let camerasau = $('#camerasauedit').val();
@@ -67,6 +69,7 @@ function editNoUpFile(){
             id: idcategory
         },
         price: price,
+        amounts:amount,
         img: img,
         displayy: displayy,
         hedieuhanh: hedieuhanh,
@@ -106,6 +109,7 @@ function editYesUpFile() {
     let name = $('#nameedit').val();
     let price = $('#priceedit').val();
     let idcategory = $('#idcategoryedit').val();
+    let amount = $('#amountedit').val();
     let displayy = $('#displayedit').val();
     let hedieuhanh = $('#hedieuhanhedit').val();
     let camerasau = $('#camerasauedit').val();
@@ -133,6 +137,7 @@ function editYesUpFile() {
                 },
                 price: price,
                 img: data,
+                amounts:amount,
                 displayy: displayy,
                 hedieuhanh: hedieuhanh,
                 camerasau: camerasau,
