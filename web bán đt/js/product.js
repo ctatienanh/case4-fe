@@ -42,7 +42,8 @@ function create(data) {
             //xử lý khi thành công
             success: function (data) {
                 alert("them thanh cong")
-                show()
+                let page = 0;
+                show(page)
             },
             error: function (err) {
                 console.log(err)
@@ -71,14 +72,14 @@ function uploadFile() {
     });
 }
 
-function show() {
+function show(data1) {
     $.ajax({
         type: "GET",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        url: "http://localhost:8080/product",
+        url: "http://localhost:8080/product?page="+data1,
         //xử lý khi thành công
         success: function (data) {
             console.log(data)
