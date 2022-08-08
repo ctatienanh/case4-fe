@@ -1,13 +1,16 @@
 getallCategory()
 function getallCategory() {
-
+    let token = localStorage.getItem("token");
     $.ajax({
         type: "GET",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        url: "http://localhost:8080/category",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader ("Authorization", "Bearer " + token);
+            },
+        url: "http://localhost:8180/category",
         //xử lý khi thành công
         success: function (data) {
             console.log(data)
@@ -28,9 +31,9 @@ function printDataCtegpry(d) {
         content +=
             `   
             <option value="${data[i].id}">${data[i].name}</option>
-
 `
     }
-
+    document.getElementById("idcategoryedit").innerHTML = content;
     contentElement.innerHTML = content;
 }
+

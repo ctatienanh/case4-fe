@@ -1,6 +1,9 @@
+show()
+
 function create(data) {
     let name = $('#name').val();
     let price = $('#price').val();
+    let amount = $('#amount').val();
     let idcategory = $('#idcategory').val();
     let displayy = $('#display').val();
     let hedieuhanh = $('#hedieuhanh').val();
@@ -12,7 +15,6 @@ function create(data) {
     let memoryStick = $('#thenho').val();
     let pin = $('#pin').val();
 
-
     let obj = {
         name: name,
         category: {
@@ -20,30 +22,38 @@ function create(data) {
         },
         price: price,
         img: data,
-        displayy:displayy,
-        hedieuhanh:hedieuhanh,
-        camerasau:camerasau,
-        cameratruoc:cameratruoc,
-        memory:memory,
-        ram:ram,
-        cpu:cpu,
-        memoryStick:memoryStick,
-        pin:pin
-
+        amounts: amount,
+        displayy: displayy,
+        hedieuhanh: hedieuhanh,
+        camerasau: camerasau,
+        cameratruoc: cameratruoc,
+        memory: memory,
+        ram: ram,
+        cpu: cpu,
+        memoryStick: memoryStick,
+        pin: pin
     }
+    let array = {
+        name :name,
+        ram:ram,
+        price: price
+    }
+
     $.ajax({
             type: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: "http://localhost:8080/product",
+            url: "http://localhost:8180/product",
             data: JSON.stringify(obj),
             //xử lý khi thành công
             success: function (data) {
                 alert("them thanh cong")
                 let page = 0;
                 show(page)
+                kiemtraSales(array)
+                show()
             },
             error: function (err) {
                 console.log(err)
@@ -65,25 +75,25 @@ function uploadFile() {
         processData: false,
         type: "POST",
         data: formData,
-        url: "http://localhost:8080/product/upImg",
+        url: "http://localhost:8180/product/upImg",
         success: function (data) {
             create(data);
         }
     });
 }
 
-function show(data1) {
+function show() {
     $.ajax({
         type: "GET",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        url: "http://localhost:8080/product?page="+data1,
+        url: "http://localhost:8180/product",
         //xử lý khi thành công
         success: function (data) {
             console.log(data)
-            printData(data);
+            printData(data.content);
         },
         error: function (err) {
             console.log(err)
@@ -92,23 +102,21 @@ function show(data1) {
 }
 
 function printData(data) {
-    var tc = document.getElementById("addProductAdmin");
-    var s = `<table class="table-outline hideImg">`;
-    for (var i = 0; i < data.length; i++) {
+    let tc = document.getElementById("addProductAdmin");
+    let s = `<table class="table-outline hideImg">`;
+    for (let i = 0; i < data.length; i++) {
         s += `       <tr>
                     <td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="options[]" value="1">
-								<label for="checkbox1"></label>
-							</span>
+							
                     </td>
                     <td>${data[i].name}</td>
                     <td>${data[i].category.name}</td>
-                    <td><img src="${data[i].img}"   ></td>
+                    <td>${data[i].price}</td>
+                    <td><img src="${data[i].img}" width="200px" height="200px"  ></td>
                     <td>${data[i].star}</td>
                     <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"  data-target="#myModalEdit" onclick="getEdit(${data[i].id})"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" onclick="deleteProduct(${data[i].id})"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                     </td>
                 </tr>`;
     }
@@ -117,3 +125,48 @@ function printData(data) {
 
     tc.innerHTML = s;
 }
+
+function search() {
+    let search = document.getElementById("search").value;
+    console.log(search)
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        url: "http://localhost:8180/product/search?name=" + search,
+        //xử lý khi thành công
+        success: function (data) {
+            console.log("vao search")
+            console.log(data)
+            console.log("kk")
+            show(data);
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+
+}
+
+function deleteProduct(id) {
+    confirm("bạn muốn xóa không ?") ?
+        $.ajax({
+            type: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "http://localhost:8180/product/delete/" + id,
+            //xử lý khi thành công
+            success: function (data) {
+                show()
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        }) : ""
+}
+
+
