@@ -1,8 +1,10 @@
 let array = [];
+let userLogin=localStorage.getItem("userLogin")
 prinshop()
 class shops {
-    constructor(idname,name, price, amount, priceall) {
+    constructor(idname,nameuser,name, price, amount, priceall) {
         this.idname = idname
+        this.name = nameuser
         this.nameproduct = name
         this.price = price
         this.amount = amount;
@@ -10,10 +12,10 @@ class shops {
     }
 }
 
-function addshop(i,n, p, a, pa) {
-    array.push(new shops(i,n, p, a, pa)),
+function addshop(i,na,n, p, a, pa) {
 
-        localStorage.setItem("TIEN ANH",JSON.stringify(array));
+    array.push(new shops(i,na,n, p, a, pa)),
+        localStorage.setItem(userLogin,JSON.stringify(array));
     prinshop()
 }
 
@@ -25,8 +27,8 @@ function delletelast(id) {
 }
 
 function prinshop() {
-    if(JSON.parse(localStorage.getItem("TIEN ANH")) != null){
-        array = JSON.parse(localStorage.getItem("TIEN ANH"))
+    if(JSON.parse(localStorage.getItem(userLogin)) != null){
+        array = JSON.parse(localStorage.getItem(userLogin))
     }
     tongsoluong(array)
     document.getElementById("tonggia").value = sum();
@@ -88,14 +90,14 @@ function kiemtrasanpham(id,n, p, a, pa) {
                         array[i].amount += 1
                         array[i].priceAll += array[i].price
                         document.getElementById("tonggia").value = sum();
-                        localStorage.setItem("TIEN ANH",JSON.stringify(array));
+                        localStorage.setItem(userLogin,JSON.stringify(array));
                         prinshop()
                         check = false;
                         break;
                     }
                 }
                 if (check == true) {
-                    addshop(id,n, p, a, pa)
+                    addshop(id,userLogin,n, p, a, pa)
                     document.getElementById("tonggia").value = sum();
                 }
 
@@ -152,7 +154,7 @@ function tang(name,id) {
             }else {
                 checknameProduct(id).amount += 1;
                 checknameProduct(id).priceAll += checknameProduct(id).price;
-                localStorage.setItem("TIEN ANH",JSON.stringify(array));
+                localStorage.setItem(userLogin,JSON.stringify(array));
                 document.getElementById("tonggia").value = sum();
                 prinshop()
             }
@@ -171,7 +173,7 @@ function giam(name,id) {
         checknameProduct(id).amount -= 1;
         checknameProduct(id).priceAll -= checknameProduct(id).price;
         document.getElementById("tonggia").value = hieu(id);
-        localStorage.setItem("TIEN ANH",JSON.stringify(array));
+        localStorage.setItem(userLogin,JSON.stringify(array));
         prinshop()
     } else {
         confirm("nếu ấn giảm nữa sản phẩm của bạn sẽ bị xóa khỏi danh sách nhấn ok để xác nhận ?") ?
@@ -194,7 +196,7 @@ function createShop() {
                 document.getElementById("thongbaoshop").innerHTML = s;
                 array = []
                 document.getElementById("soluong").value = 0;
-                localStorage.removeItem("TIEN ANH");
+                localStorage.removeItem(userLogin);
                 prinshop()
             },
             error: function (err) {

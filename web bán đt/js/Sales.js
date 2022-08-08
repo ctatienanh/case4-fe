@@ -1,5 +1,6 @@
 showdoanhthu()
 let arr = [];
+let allprice =0;
 function kiemtraSales(obj) {
     $.ajax({
         type: "GET",
@@ -129,17 +130,75 @@ function priceallgiam() {
 
 
 
+function showdanhsachKH(name) {
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        url: "http://localhost:8180/order",
+        //xử lý khi thành công
+        success: function (data) {
+            lichsukh(name,data)
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
+
+function lichsukh(name, data) {
+let s = ""
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].name == name){
+            s+=
+                `
+                <tr>
+                <td>${data[i].nameproduct}</td>
+                <td>${data[i].amount}</td>
+                <td>${data[i].price}</td>
+                <td>${data[i].priceAll}</td>
+</tr>
+            `
+        }
+    }
+    document.getElementById("lskh").innerHTML =s;
+}
+
 
 function danhsachkh(data) {
     let s= ""
     for (let i = 0; i < data.length; i++) {
         s+= `
+<tr>
            <td>
-                            <input data-target="#lichsukh" data-toggle="modal" value="Tên khách hàng" style="border: none; background-color: white" type="button" readonly>
+    <input data-target="#lichsukh" data-toggle="modal" value="${data[i].name}" style="border: none; background-color: white" onclick="showdanhsachKH('${data[i].name}')" type="button" readonly>
                         </td>
                         <td>
-                            3000
+                            ${data[i].sumprice}
                         </td>
+                        </tr>
         `
     }
+
+    document.getElementById("dskh").innerHTML = s;
+}
+
+function priceall() {
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        url: "http://localhost:8180/userapi/name" ,
+        //xử lý khi thành công
+        success: function (data) {
+            danhsachkh(data)
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
 }

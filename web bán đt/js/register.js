@@ -7,7 +7,7 @@ $.ajax({
         // kiểu truyền đi
         'Content-Type': 'application/json'
     },
-    url: "http://localhost:8180/account",
+    url: "http://localhost:8180/user",
     //xử lý khi thành công
     success: function (data) {
         listuser=data;

@@ -22,9 +22,7 @@
     //     }
     // })
 
-function logoutuser(){
-    // localStorage.setItem("token", "");
+function logout(){
     localStorage.clear()
-    // localStorage.setItem("roleLogin","");
     location.href = "shop.html"
 }

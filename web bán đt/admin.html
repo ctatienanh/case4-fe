@@ -284,21 +284,22 @@
             font-weight: normal;
         }
 
-        #tabledoanhthu, #lichsuds {
+        #tabledoanhthu, #lichsuds, #lichsudskh {
             border: 1px solid;
         }
 
-        #tabledoanhthu th, #lichsuds th {
+        #tabledoanhthu th, #lichsuds th, #lichsudskh th {
             text-align: center;
             border: 1px solid;
 
         }
 
-        #tabledoanhthu td, #lichsuds td {
+        #tabledoanhthu td, #lichsuds td, #lichsudskh td {
             text-align: center;
             border: 1px solid;
         }
     </style>
+
     <script>
         $(document).ready(function () {
             // Activate tooltip
@@ -371,7 +372,7 @@
                            data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
                         <a href="#deleteEmployeeModal" class="btn btn-danger" data-target="#doanhthu"
                            data-toggle="modal"> <span>Doanh Thu</span></a>
-                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-target="#lichsu" data-toggle="modal">
+                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-target="#lichsu" data-toggle="modal" onclick="priceall()">
                             <span>Danh sách khách Hàng</span></a>
 
                     </div>
@@ -502,15 +503,10 @@
                             Số Tiền đã mua
                         </th>
                     </tr>
-                    <tr id="dskh">
-                        <td>
-                            <input data-target="#lichsukh" data-toggle="modal" value="Tên khách hàng" style="border: none; background-color: white" type="button" readonly>
-                        </td>
-                        <td>
-                            3000
-                        </td>
+                    <tbody id="dskh">
 
-                    </tr>
+                    </tbody>
+
                 </table>
 
             </div>
@@ -536,18 +532,29 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <table style="  border-collapse:collapse" cellpadding="7">
+                <table id="lichsudskh" style="margin-left: 30px   ;border-collapse:collapse" cellpadding="7">
                     <tr>
                         <th colspan="4" style="text-align: center">Thông tin doanh số các sản phẩm</th>
                     </tr>
                     <tr>
                         <th>
-                            Tên khách hàng
+                            Tên hàng
                         </th>
+                        <th>
+                            Số lượng
+                        </th>
+                        <th>
+                            Đơn Giá
+                        </th>
+                        <th>
+                            Tổng Giá
+                        </th>
+
                     </tr>
                     <tbody id="lskh">
 
                     </tbody>
+
                 </table>
 
             </div>
@@ -747,7 +754,6 @@
 <script src="js/category.js"></script>
 <script src="js/product.js"></script>
 <script src="js/Sales.js"></script>
-<script src="js/logout.js"></script>
 <script src="js/category.js"></script>
 <script src="js/admin.js"></script>
 
@@ -755,7 +761,7 @@
 
     let token=localStorage.getItem("token")
     let role=localStorage.getItem("roleLogin");
-    if (role==null){
+    if (role==null || role=="ROLE_USER"){
         location.href="403.html";
     }
     function parseJwt (token) {
@@ -770,3 +776,4 @@
     let str= `<a className="text-success" >${parseJwt(token).sub}</a>`;
     document.getElementById("username").innerHTML=str
 </script>
+
