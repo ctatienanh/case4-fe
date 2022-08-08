@@ -1,4 +1,4 @@
 function logout(){
-    localStorage.clear()
+    localStorage.removeItem("userLogin")
     location.href = "shop.html"
 }

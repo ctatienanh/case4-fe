@@ -23,6 +23,8 @@ function addshop(i,na,n, p, a, pa) {
 function delletelast(id) {
     let index = checkindexProduct(id);
     array.splice(index, 1);
+    localStorage.setItem(userLogin,JSON.stringify(array));
+
     prinshop()
 }
 
@@ -112,7 +114,6 @@ function kiemtrasanpham(id,n, p, a, pa) {
     }else {
         alert("Ban phai dang nhap")
         location.href = "login.html"
-
     }
 }
 
@@ -228,6 +229,42 @@ function hieu(id) {
         t-= array[i].price
     }
     return t;
+}
+
+function ktcreate() {
+        $.ajax({
+            type: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "http://localhost:8180/product",
+            //xử lý khi thành công
+            success: function (data) {
+                let check = true;
+                for (let i = 0; i < array.length; i++) {
+                    for (let j = 0; j < data.content.length; j++) {
+                        if (array[i].nameproduct == data.content[j].name){
+                            if (array[i].amount > data.content[j].amounts){
+                                let s = ` Sản phẩm ${array[i].nameproduct}  Chỉ còn  ${data.content[j].amounts}  sản phẩm`
+                                document.getElementById("thongbaoshop").innerHTML =s
+                                array[i].amount = data.content[j].amounts
+                                array[i].priceAll = (array[i].price * array[i].amount)
+                                localStorage.setItem(userLogin,JSON.stringify(array));
+                                prinshop()
+                                check = false;
+                            }
+                        }
+                    }
+                }
+
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+
 }
 
 
