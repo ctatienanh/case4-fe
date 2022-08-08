@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="eacc0df3-f9b9-4ea1-87bf-bcf1bece4e77" name="Changes" comment="login tien anh">
       <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -20,6 +21,14 @@
       <change beforePath="$PROJECT_DIR$/web bán đt/js/logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/web bán đt/js/logout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web bán đt/js/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/web bán đt/js/register.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web bán đt/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/web bán đt/login.html" afterDir="false" />
+=======
+    <list default="true" id="8b01e61c-82a4-48ed-93a7-6593eef2de25" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/web bán đt/js/userLogin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web bán đt/js/logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/web bán đt/js/logout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web bán đt/js/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/web bán đt/js/register.js" afterDir="false" />
+>>>>>>> f49be8fbfd352cdfe1a70c2ab1d5b758b540e0d9
       <change beforePath="$PROJECT_DIR$/web bán đt/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/web bán đt/shop.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,6 +62,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -66,9 +76,13 @@
       <workItem from="1659516549976" duration="2906000" />
       <workItem from="1659575985452" duration="856000" />
       <workItem from="1659856098939" duration="68000" />
+<<<<<<< HEAD
       <workItem from="1659928684354" duration="6129000" />
       <workItem from="1659943806186" duration="5465000" />
       <workItem from="1659951864126" duration="306000" />
+=======
+      <workItem from="1659928684354" duration="12824000" />
+>>>>>>> f49be8fbfd352cdfe1a70c2ab1d5b758b540e0d9
     </task>
     <servers />
   </component>

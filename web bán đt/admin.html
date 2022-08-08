@@ -759,11 +759,12 @@
 
 <script>
 
-    let token=localStorage.getItem("token")
     let role=localStorage.getItem("roleLogin");
     if (role==null || role=="ROLE_USER"){
         location.href="403.html";
     }
+    let token=localStorage.getItem("token")
+
     function parseJwt (token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

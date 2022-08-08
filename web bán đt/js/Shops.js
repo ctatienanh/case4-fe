@@ -69,44 +69,51 @@ function prinshop() {
 }
 
 function kiemtrasanpham(id,n, p, a, pa) {
-    $.ajax({
-        type: "GET",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        url: "http://localhost:8180/single/" + id,
-        //xử lý khi thành công
-        success: function (data) {
-            if (data.amounts <=0){
-                let s =`                <p style="text-align: center">Sản Phẩm Hiện Tại Đã Hết</p>`
-                document.getElementById("thongbaoshop").innerHTML = s;
-            }else {
-                let s =`                <p style="text-align: center">Thêm sản phẩm thành công</p>`
-                document.getElementById("thongbaoshop").innerHTML = s;
-                let check = true;
-                for (let i = 0; i < array.length; i++) {
-                    if (array[i].idname == id) {
-                        array[i].amount += 1
-                        array[i].priceAll += array[i].price
-                        document.getElementById("tonggia").value = sum();
-                        localStorage.setItem(userLogin,JSON.stringify(array));
-                        prinshop()
-                        check = false;
-                        break;
+    let user = localStorage.getItem("userLogin");
+    if (user != null) {
+        $.ajax({
+            type: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "http://localhost:8180/single/" + id,
+            //xử lý khi thành công
+            success: function (data) {
+                if (data.amounts <= 0) {
+                    let s = `                <p style="text-align: center">Sản Phẩm Hiện Tại Đã Hết</p>`
+                    document.getElementById("thongbaoshop").innerHTML = s;
+                } else {
+                    let s = `                <p style="text-align: center">Thêm sản phẩm thành công</p>`
+                    document.getElementById("thongbaoshop").innerHTML = s;
+                    let check = true;
+                    for (let i = 0; i < array.length; i++) {
+                        if (array[i].idname == id) {
+                            array[i].amount += 1
+                            array[i].priceAll += array[i].price
+                            document.getElementById("tonggia").value = sum();
+                            localStorage.setItem(userLogin, JSON.stringify(array));
+                            prinshop()
+                            check = false;
+                            break;
+                        }
                     }
-                }
-                if (check == true) {
-                    addshop(id,userLogin,n, p, a, pa)
-                    document.getElementById("tonggia").value = sum();
-                }
+                    if (check == true) {
+                        addshop(id, userLogin, n, p, a, pa)
+                        document.getElementById("tonggia").value = sum();
+                    }
 
+                }
+            },
+            error: function (err) {
+                console.log(err)
             }
-        },
-        error: function (err) {
-            console.log(err)
-        }
-    })
+        })
+    }else {
+        alert("Ban phai dang nhap")
+        location.href = "login.html"
+
+    }
 }
 
 function tongsoluong(array) {

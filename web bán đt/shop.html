@@ -29,27 +29,30 @@
     <link rel="stylesheet" href="css/responsive.css">
     <script src="js/EDIT.js"></script>
 
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <![endif]-->
 </head>
 <body>
-
 <div class="header-area">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
                 <div class="user-menu">
                     <ul>
-                        <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
+                        <li><a href=""><i class="fa fa-user"></i> My Account</a></li>
                         <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                         <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
-                        <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                        <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
+                        <li ><i class="fa fa-user"><select style="webkit-tap-highlight-color: rgba(0,0,0,0); background-color: #999999">
+                            <a  ></a>
+                        </select></i></li>
+                        <li><a href="login.html"><i class="fa fa-user"></i> Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -57,26 +60,20 @@
             <div class="col-md-4">
                 <div class="header-right">
                     <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span
-                                    class="key">currency :</span><span class="value">USD </span><b
-                                    class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">USD</a></li>
-                                <li><a href="#">INR</a></li>
-                                <li><a href="#">GBP</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown dropdown-small">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span
-                                    class="key">language :</span><span class="value">English </span><b
-                                    class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">French</a></li>
-                                <li><a href="#">German</a></li>
-                            </ul>
+                        <li class="nav-item nav-profile dropdown" style="display: flex">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown" >
+                                <a class="text-success" ></a>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                                <a class="dropdown-item">
+                                    <i class="ti-settings text-primary"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" onclick="logout()">
+                                    <i class="ti-power-off text-primary"></i>
+                                    Logout
+                                </a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -486,5 +483,14 @@
       })
   </script>
 <script src="js/checkRole.js"></script>
+<script src="js/userLogin.js"></script>
+<script src="js/login.js"></script>
   </body>
+<script>
+    let token=localStorage.getItem("token")
+    let user=localStorage.getItem("userLogin")
+    let str= `<option >${user}</option>
+              <option>Dang xuat</option>`;
+    document.getElementById("username").innerHTML = str
+</script>
 </html>
