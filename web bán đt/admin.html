@@ -11,12 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<<<<<<< HEAD
 
-
-=======
-<!--    <script src="js/admin.js"></script>-->
->>>>>>> d11e20619b8265e406a175e74a84292d5bb7006b
     <style>
         body {
             color: #566787;
@@ -289,16 +284,18 @@
             font-weight: normal;
         }
 
-        #tabledoanhthu {
+        #tabledoanhthu, #lichsuds {
             border: 1px solid;
         }
 
-        #tabledoanhthu th {
+        #tabledoanhthu th, #lichsuds th {
+            text-align: center;
             border: 1px solid;
 
         }
 
-        #tabledoanhthu td {
+        #tabledoanhthu td, #lichsuds td {
+            text-align: center;
             border: 1px solid;
         }
     </style>
@@ -434,7 +431,6 @@
                 <table>
                     <tbody id="tongdt">
                     </tbody>
-
                 </table>
 
                 <table id="tabledoanhthu" style="  border-collapse:collapse" cellpadding="7">
@@ -487,23 +483,36 @@
 <div class="modal fade" id="lichsu">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Lich sử mua hàng </h4>
+                <h4 class="modal-title">Danh sach khach hang </h4>
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
-
             <!-- Modal body -->
             <div class="modal-body">
-                <table>
+                <table id="lichsuds" style="margin-left: 50px   ;border-collapse:collapse" cellpadding="7">
                     <tr>
-                        <td><label>Tổng Doang Thu </label>
-                            <input type="text" class="form-control" READONLY></td>
+                        <th colspan="2" style="text-align: center">Thông tin doanh số các sản phẩm</th>
                     </tr>
                     <tr>
+                        <th>
+                             Khách hàng
+                        </th>
+                        <th>
+                            Số Tiền đã mua
+                        </th>
+                    </tr>
+                    <tr id="dskh">
                         <td>
+                            <input data-target="#lichsukh" data-toggle="modal" value="Tên khách hàng" style="border: none; background-color: white" type="button" readonly>
+                        </td>
+                        <td>
+                            3000
+                        </td>
+
+                    </tr>
                 </table>
+
             </div>
 
             <!-- Modal footer -->
@@ -515,6 +524,46 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="lichsukh">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Lịch Sử </h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <table style="  border-collapse:collapse" cellpadding="7">
+                    <tr>
+                        <th colspan="4" style="text-align: center">Thông tin doanh số các sản phẩm</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Tên khách hàng
+                        </th>
+                    </tr>
+                    <tbody id="lskh">
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button style="margin-right: 131px" type="button" class="btn btn-danger" data-dismiss="modal">Đóng
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
 
 <!--lich su mua hang-->
 
@@ -694,12 +743,10 @@
 </div>
 </body>
 </html>
-<<<<<<< HEAD
 <script src="js/EDIT.js"></script>
 <script src="js/category.js"></script>
 <script src="js/product.js"></script>
 <script src="js/Sales.js"></script>
-=======
 <script src="js/logout.js"></script>
 <script src="js/category.js"></script>
 <script src="js/admin.js"></script>
@@ -723,4 +770,3 @@
     let str= `<a className="text-success" >${parseJwt(token).sub}</a>`;
     document.getElementById("username").innerHTML=str
 </script>
->>>>>>> d11e20619b8265e406a175e74a84292d5bb7006b

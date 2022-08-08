@@ -60,7 +60,6 @@ function showdoanhthu() {
             console.log(err)
         }
     })
-
 }
 
 function prindoanhthu(data) {
@@ -126,4 +125,21 @@ function priceallgiam() {
         `
     }
     document.getElementById("dt").innerHTML = s;
+}
+
+
+
+
+function danhsachkh(data) {
+    let s= ""
+    for (let i = 0; i < data.length; i++) {
+        s+= `
+           <td>
+                            <input data-target="#lichsukh" data-toggle="modal" value="Tên khách hàng" style="border: none; background-color: white" type="button" readonly>
+                        </td>
+                        <td>
+                            3000
+                        </td>
+        `
+    }
 }
